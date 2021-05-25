@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../screen/alert_screen.dart';
 import '../screen/home_screen.dart';
-import '../screen/settings_screen.dart';
+import 'feeds_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   List<Widget> _navList = [
     HomeScreen(),
     AlertScreen(),
-    SettingsScreen(),
+    FeedsScreen(),
   ];
   GlobalKey _bottomNavigationKey = GlobalKey();
 

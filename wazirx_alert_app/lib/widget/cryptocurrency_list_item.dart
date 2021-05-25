@@ -7,8 +7,10 @@ import '../model/cryptocurrency_item.dart';
 class CryptocurrencyListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<CryptocurrencyItem>(context, listen: false);
+    final data = Provider.of<CryptocurrencyItem>(context);
     bool _isHigh = data.open < double.parse(data.buy);
+    var inr = data.quoteUnit == 'inr' ? "₹" : "";
+
     return Container(
       margin: EdgeInsets.symmetric(
         vertical: defaultPadding / 4,
@@ -42,7 +44,7 @@ class CryptocurrencyListItem extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            data.buy,
+            '${inr + data.buy}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: _isHigh ? Colors.green : Colors.red,

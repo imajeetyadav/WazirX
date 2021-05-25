@@ -1,5 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -24,7 +25,6 @@ class Cryptocurrency with ChangeNotifier {
 
   Future<void> fetchTicker() async {
     final url = Uri.parse('https://api.wazirx.com/api/v2/tickers/');
-    final currentTime = DateTime.now();
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -55,6 +55,10 @@ class Cryptocurrency with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       throw (error);
+    } finally {
+      Future.delayed(Duration(seconds: 10), () {
+        fetchTicker();
+      });
     }
   }
 }

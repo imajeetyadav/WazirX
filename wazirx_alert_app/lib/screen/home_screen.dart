@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wazirx_alert_app/model/feeds_provider.dart';
 
-import '../constants.dart';
 import '../model/cryptocurrency.dart';
 import '../widget/crypto_tabbar.dart';
 import '../widget/header.dart';
@@ -22,13 +22,21 @@ class _HomeScreenState extends State<HomeScreen> {
         _isLoading = true;
       });
       Provider.of<Cryptocurrency>(context).fetchTicker().then((_) {
-        setState(() {
-          _isLoading = false;
-        });
+        // if (!mounted) {
+        // setState(() {
+        //   _isLoading = false;
+        // });
+        // }
       });
+      Provider.of<FeedsProvider>(context).fetchRSS();
     }
     _isInit = false;
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -44,22 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Header(
                   headerText: 'WazirX Alert',
                 ),
-                Spacer(),
-                Text(
-                  Provider.of<Cryptocurrency>(context).lastUpdate.toString(),
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: primaryColor,
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.refresh_sharp),
-                  onPressed: () {
-                    Provider.of<Cryptocurrency>(context, listen: false)
-                        .fetchTicker();
-                  },
-                )
+                // Spacer(),
+                // Text(
+                //   Provider.of<Cryptocurrency>(context).lastUpdate.toString(),
+                //   style: TextStyle(
+                //     fontSize: 15,
+                //     fontWeight: FontWeight.bold,
+                //     color: primaryColor,
+                //   ),
+                // ),
+                // IconButton(
+                //   icon: Icon(Icons.refresh_sharp),
+                //   onPressed: () {
+                //     Provider.of<Cryptocurrency>(context, listen: false)
+                //         .fetchTicker();
+                //   },
+                // )
               ],
             ),
           ),
