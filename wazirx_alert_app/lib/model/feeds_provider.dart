@@ -5,9 +5,7 @@ import 'package:http/http.dart' as http;
 import 'feeds.dart';
 
 class FeedsProvider with ChangeNotifier {
-  RssFeed _feed;
   List<Feed> _items = [];
-
   List<Feed> get items {
     return _items.toList();
   }
@@ -21,7 +19,7 @@ class FeedsProvider with ChangeNotifier {
       // print(_feed.title);
       List<Feed> loadedData = [];
       _feed.items.forEach((element) {
-        print(element.title);
+        // print(element.title);
         loadedData.add(Feed(
           title: element.title,
           description: element.enclosure.url,
